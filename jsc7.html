@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript-7</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f6f6f6;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            position: relative;
+        }
+
+        .train-container {
+            position: absolute;
+            top: -200px;
+            left: 0;
+            width: 150px;
+            animation: moveTrain 2s linear infinite;
+        }
+
+        .train {
+            width: 200px;
+        }
+
+        @keyframes moveTrain {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+
+        h2 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="train-container">
+            <img src="train.jpg" alt="Train" class="train">
+        </div>
+        <p>Click the following buttons to handle animation</p>
+        <div class="button-container">
+            <center>
+                <button id="start-animation">Start</button>
+                <button id="stop-animation">Stop</button>
+            </center>
+        </div>
+    </div>
+    <script>
+        const trainContainer = document.querySelector('.train-container');
+        const startButton = document.getElementById('start-animation');
+        const stopButton = document.getElementById('stop-animation');
+
+        startButton.addEventListener('click', () => {
+            trainContainer.style.animationPlayState = 'running';
+        });
+
+        stopButton.addEventListener('click', () => {
+            trainContainer.style.animationPlayState = 'paused';
+        });
+
+    </script>
+</body>
+
+</html>

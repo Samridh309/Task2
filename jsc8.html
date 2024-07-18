@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Task8</title>
+
+    <style>
+        body {
+            background-color: rgb(222, 136, 150); 
+            background-image: linear-gradient(rgb(255, 255, 156), rgb(222, 136, 150));
+        }
+        button {
+            background-color: red;
+            border: 5px solid black;
+            padding: 10px;
+            border-radius: 20px;
+            margin-left: 50%;
+        }
+
+        h2 {
+            color: blue;
+        }
+        .error-message {
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 align="center">Registration Form</h2>
+
+    <form id="registrationForm">
+        <table align="center" cellpadding="10">
+            <tr>
+                <td>
+                    <label for="firstName">First Name</label>
+                </td>
+                <td>
+                    <input type="text" id="firstName">
+                    <span class="error-message" id="firstNameError">Poor</span><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="lastName">Last Name</label>
+                </td>
+                <td>
+                    <input type="text" id="lastName">
+                    <span class="error-message" id="lastNameError">Poor</span><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="email">Email</label>
+                </td>
+                <td>
+                    <input type="text" id="email">
+                    <span class="error-message" id="emailError">Poor</span><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="password">Password</label>
+                </td>
+                <td>
+                    <input type="password" id="password">
+                    <span class="error-message" id="passwordError">Poor</span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="rePassword">Re-enter Password</label>
+                </td>
+                <td>
+                    <input type="password" id="rePassword">
+                    <span class="error-message" id="rePasswordError">Poor</span><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Gender</td>
+                <td>
+                    <input type="radio" name="gender" value="Male"> Male <br>
+                    <input type="radio" name="gender" value="Female"> Female 
+                    <span class="error-message" id="genderError">Poor</span><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="age">Age</label>
+                </td>
+                <td>
+                    <input type="number" id="age">
+                    <span class="error-message" id="ageError">Poor</span><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="phone">Phone Number</label>
+                </td>
+                <td>
+                    <input type="text" id="phone">
+                    <span class="error-message" id="phoneError">Poor</span><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="address">Address</label>
+                </td>
+                <td>
+                    <textarea id="address" rows="5" cols="25"></textarea>
+                    <span class="error-message" id="addressError">Poor</span><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="state">State</label>
+                </td>
+                <td>
+                    <input type="text" id="state">
+                    <span class="error-message" id="stateError">Poor</span><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="country">Country</label>
+                </td>
+                <td> 
+                    <select id="country">
+                        <option value="">Select your Country</option>
+                        <option value="India">India</option>
+                        <option value="England">England</option>
+                        <option value="Australia">Australia</option>
+                        <option value="China">China</option>
+                    </select>
+                    <span class="error-message" id="countryError">Poor</span><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="languages">Languages Known</label>
+                </td>
+                <td>
+                    <input type="checkbox" name="languages" value="English"> English
+                    <input type="checkbox" name="languages" value="Kannada"> Kannada
+                    <input type="checkbox" name="languages" value="Hindi"> Hindi
+                    <input type="checkbox" name="languages" value="Telugu"> Telugu
+                    <span class="error-message" id="languagesError">Poor</span><br>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <input type="checkbox" id="declaration"> Hereby I declare that all given details are true
+                </td>
+            </tr>
+
+            <tr align="right">
+                <td colspan="2">
+                    Login to <a href="https://ethnus.com/">Ethnus</a> Website
+                </td>
+            </tr>
+        </table>
+        <button type="button" onclick="validateForm()">Register</button>
+    </form>
+
+    <script>
+        function validateForm() {
+            const fields = [
+                { id: 'firstName', errorId: 'firstNameError' },
+                { id: 'lastName', errorId: 'lastNameError' },
+                { id: 'email', errorId: 'emailError' },
+                { id: 'password', errorId: 'passwordError' },
+                { id: 'rePassword', errorId: 'rePasswordError' },
+                { id: 'age', errorId: 'ageError' },
+                { id: 'phone', errorId: 'phoneError' },
+                { id: 'address', errorId: 'addressError' },
+                { id: 'state', errorId: 'stateError' },
+                { id: 'country', errorId: 'countryError' },
+                { id: 'languages', errorId: 'languagesError' }
+            ];
+
+            let valid = true;
+            fields.forEach(field => {
+                const input = document.getElementById(field.id);
+                const errorMessage = document.getElementById(field.errorId);
+
+                if (input) {
+                    if ((input.type === 'checkbox' || input.type === 'radio') && !input.checked) {
+                        errorMessage.style.display = 'inline';
+                        valid = false;
+                    } else if (input.type !== 'checkbox' && input.value.trim() === '') {
+                        errorMessage.style.display = 'inline';
+                        valid = false;
+                    } else {
+                        errorMessage.style.display = 'none';
+                    }
+                } else if (field.id === 'gender' && !document.querySelector('input[name="gender"]:checked')) {
+                    errorMessage.style.display = 'inline';
+                    valid = false;
+                } else if (field.id === 'languages' && !document.querySelector('input[name="languages"]:checked')) {
+                    errorMessage.style.display = 'inline';
+                    valid = false;
+                } else if (field.id === 'country' && document.getElementById('country').value === '') {
+                    errorMessage.style.display = 'inline';
+                    valid = false;
+                } else {
+                    errorMessage.style.display = 'none';
+                }
+            });
+
+            const password = document.getElementById('password').value;
+            const rePassword = document.getElementById('rePassword').value;
+            const rePasswordError = document.getElementById('rePasswordError');
+
+            if (password !== rePassword) {
+                rePasswordError.innerText = 'Mismatch';
+                rePasswordError.style.display = 'inline';
+                valid = false;
+            } else {
+                rePasswordError.innerText = 'Poor';
+            }
+
+            if (valid) {
+                alert("Form submitted successfully!");
+            }
+        }
+    </script>
+
+</body>
+</html>

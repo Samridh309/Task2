@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form Validation Example</title>
+  <style>
+    body
+    {
+        display: flex;
+        justify-content: center;
+        padding-top: 20px;
+    }
+    .error {
+      color: red;
+    }
+    input.error, textarea.error {
+      border-color: red;
+    }
+  </style>
+</head>
+<body>
+  <form id="contactForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+    <span class="error" id="nameError">This field is required</span><br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+    <span class="error" id="emailError">A valid email address is required</span><br><br>
+
+    <label for="website">Website:</label>
+    <input type="url" id="website" name="website">
+    <span class="error" id="websiteError">A valid url is required</span><br><br>
+
+    <label for="message">Message:</label>
+    <textarea id="message" name="message"></textarea>
+    <span class="error" id="messageError">This field is required</span><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <script >
+    document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('contactForm');
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const websiteInput = document.getElementById('website');
+  const messageInput = document.getElementById('message');
+  const nameError = document.getElementById('nameError');
+  const emailError = document.getElementById('emailError');
+  const websiteError = document.getElementById('websiteError');
+  const messageError = document.getElementById('messageError');
+
+  form.addEventListener('submit', function (event) {
+    let isValid = true;
+
+    // Name validation
+    if (nameInput.value.trim() === '') {
+      nameInput.classList.add('error');
+      nameError.style.display = 'inline';
+      isValid = false;
+    } else {
+      nameInput.classList.remove('error');
+      nameError.style.display = 'none';
+    }
+
+    // Email validation
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailPattern.test(emailInput.value.trim())) {
+      emailInput.classList.add('error');
+      emailError.style.display = 'inline';
+      isValid = false;
+    } else {
+      emailInput.classList.remove('error');
+      emailError.style.display = 'none';
+    }
+
+    // Website validation
+    const urlPattern = /^(https?:\/\/)?([\w\d\-_]+\.+[A-Za-z]{2,})+\/?/;
+    if (!urlPattern.test(websiteInput.value.trim())) {
+      websiteInput.classList.add('error');
+      websiteError.style.display = 'inline';
+      isValid = false;
+    } else {
+      websiteInput.classList.remove('error');
+      websiteError.style.display = 'none';
+    }
+
+    // Message validation
+    if (messageInput.value.trim() === '') {
+      messageInput.classList.add('error');
+      messageError.style.display = 'inline';
+      isValid = false;
+    } else {
+      messageInput.classList.remove('error');
+      messageError.style.display = 'none';
+    }
+
+    if (!isValid) {
+      event.preventDefault();
+    }
+  });
+});
+
+  </script>
+</body>
+</html>

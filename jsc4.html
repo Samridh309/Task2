@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Javascript-4</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <button type="button" id="showDate">Show Date</button>
+    <p id="date"></p>
+    <button type="button" id="showTime">Show Time</button>
+    <p id="time"></p>
+
+    <script>
+        document.getElementById('showDate').addEventListener('click', function() {
+            const options = { day: '2-digit', month: 'long', year: 'numeric' };
+            const currentDate = new Date().toLocaleDateString('en-GB', options).replace(',', '');
+            document.getElementById('date').innerText = 'Date: ' + currentDate;
+        });
+
+        document.getElementById('showTime').addEventListener('click', function() {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Kolkata', timeZoneName: 'short' };
+            const currentTime = new Date().toLocaleString('en-GB', options).replace(',', '').replace(' GMT+5:30', ' GMT+0530 (IST)');
+            document.getElementById('time').innerText = 'Time: ' + currentTime;
+        });
+    </script>
+</body>
+</html>
